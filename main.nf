@@ -2541,7 +2541,7 @@ process genotyping_freebayes {
   script:
   def skip_coverage = "${params.freebayes_g}" == 0 ? "" : "-g ${params.freebayes_g}"
   """
-  freebayes -f ${fasta} -p ${params.freebayes_p} -C ${params.freebayes_C} ${skip_coverage} ${bam} > ${samplename}.freebayes.vcf
+  freebayes --report-monomorphic -f ${fasta} -p ${params.freebayes_p} -C ${params.freebayes_C} ${skip_coverage} ${bam} > ${samplename}.freebayes.vcf
   bgzip -@  ${task.cpus} ${samplename}.freebayes.vcf
   """
 }
